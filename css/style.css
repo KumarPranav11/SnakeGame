@@ -1,0 +1,233 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Varela+Round&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Varela+Round&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.body{
+    background: url("../image/background.jpg");
+    min-height: 100vh;
+    background-size: 100vw 100vh;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#scoreBox{
+    position: absolute;
+    top: 9px;
+    right: 200px;
+    font-size: 39px;
+    font-weight: bold;
+    font-family: "Roboto", sans-serif;
+    color: aqua;
+}
+
+
+
+#hiscoreBox{
+    position: absolute;
+    top: 59px;
+    right: 200px;
+    font-size: 39px;
+    font-weight: bold;
+    font-family: "Roboto", sans-serif;
+    right: 55px;
+    color: aqua;
+}
+
+#kumarpranav {
+    position: absolute;
+    bottom: 0;   
+    right: 0;   
+    margin: 10px;  
+    font-size: 20px;
+    font-family: "Roboto", sans-serif;
+    color: black;
+    margin-right: 60px;
+}
+
+
+#board{
+    background: linear-gradient(rgb(170, 236, 170), rgb(236, 236, 167));
+    width: 90vmin;
+    height: 92vmin;
+    border: 2px solid black;
+    display: grid;
+    grid-template-rows: repeat(18, 1fr);
+    grid-template-columns: repeat(18, 1fr);
+}
+
+
+
+.game_name {
+  position: absolute;
+  top: 0;
+  left: 0; 
+  padding: 10px 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  margin: 0;
+}
+
+
+.name {
+  font-size: 2em; 
+  font-weight: bold;
+  color: #00ffff; 
+  text-shadow: 1px 1px 2px #000000; 
+  font-family: 'Arial', sans-serif;
+}
+
+/*
+.head{
+    background: linear-gradient(rgb(240, 124, 124), rgb(228, 228, 129));
+    border: 2px solid purple;
+    transform: scale(1.02);
+    border-radius: 50%;
+}
+
+.snake{
+    background-color: purple;
+    border: .25vmin solid white;
+    border-radius: 50%;
+}
+
+.food{
+    background: linear-gradient(red, purple);
+    border: .25vmin solid black;
+    border-radius: 50%;
+}
+    */
+
+
+    /* Snake Head */
+.head {
+  background: linear-gradient(145deg, #4CAF50, #2E7D32); /* Rich green snake head */
+  border: 3px solid black;
+  border-radius: 50%; /* Rounded head */
+  width: 100%; 
+  height: 100%;
+  position: relative; /* Needed for eyes and tongue placement */
+  animation: pulse 1s infinite alternate;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); /* 3D head effect */
+}
+
+/* Eyes on Snake Head */
+.head::before, .head::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: white;
+  border-radius: 50%;
+  top: 30%;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Eye glow */
+}
+
+/* Left Eye */
+.head::before {
+  left: 25%;
+}
+
+/* Right Eye */
+.head::after {
+  right: 25%;
+}
+
+/* Snake Tongue */
+.head span {
+  position: absolute;
+  bottom: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 15px;
+  background-color: red;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%); /* Forked tongue */
+  animation: tongueFlick 0.5s infinite;
+}
+
+/* Snake Body Segments */
+.snake {
+  background: radial-gradient(circle at 30% 30%, #4CAF50, #2E7D32); /* Scaly look */
+  border: 2px solid black;
+  border-radius: -35%; /* Oval for scales */
+  width: 100%; 
+  height: 100%;
+  animation: snakeMove 0.6s infinite alternate;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6); /* Depth effect */
+}
+
+/* Food */
+.food {
+  background: radial-gradient(circle, #00FFFF 30%, #008B8B 90%); /* Cyan-blue gradient */
+  border: 2px solid black;
+  border-radius: 50%; /* Round food */
+  width: 100%; 
+  height: 100%;
+  animation: foodBounce 1.2s infinite alternate, foodGlow 2s infinite alternate;
+  box-shadow: 0 4px 10px rgba(0, 255, 255, 0.8); /* Soft cyan glow */
+}
+
+/* Animations */
+
+/* Snake Head Pulse Animation */
+@keyframes pulse {
+  from {
+    transform: scale(1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+  }
+  to {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.8);
+  }
+}
+
+/* Snake Movement Animation */
+@keyframes snakeMove {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.03);
+  }
+}
+
+/* Tongue Flick Animation */
+@keyframes tongueFlick {
+  0%, 100% {
+    height: 15px;
+  }
+  50% {
+    height: 25px;
+  }
+}
+
+/* Food Glow Animation */
+@keyframes foodGlow {
+  from {
+    box-shadow: 0 0 5px rgba(0, 255, 255, 0.7); /* Cyan glow */
+  }
+  to {
+    box-shadow: 0 0 20px rgba(0, 139, 139, 0.9); /* Deeper cyan glow */
+  }
+}
+
+/* Food Bounce Animation */
+@keyframes foodBounce {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-10%);
+  }
+}
+
+
+
+ 
+
